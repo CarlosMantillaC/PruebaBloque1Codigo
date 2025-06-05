@@ -30,7 +30,7 @@ class ViewControllerReproductor: UIViewController {
     
     override func loadView() {
         
-        let tableView = UITableView()
+        tableView = UITableView()
         
         tableView.dataSource = self
         tableView.register(TableViewCell.self, forCellReuseIdentifier: "TableViewCell")
@@ -84,6 +84,7 @@ extension ViewControllerReproductor: AccionesBotones {
 
 
 extension ViewControllerReproductor {
+    
     func reproducir(nombre: String) {
         guard let url = Bundle.main.url(forResource: nombre, withExtension: "mp3") else {
             print("No se encontró el archivo \(nombre).mp3")
