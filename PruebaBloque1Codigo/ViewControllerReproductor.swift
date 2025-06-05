@@ -79,7 +79,8 @@ extension ViewControllerReproductor: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as! TableViewCell
         
         let model = canciones[indexPath.row]
-        cell.configure(model: model)
+        let isReproduciendo = model.title == cancionActual
+        cell.configure(model: model, isReproduciendo: isReproduciendo)
         cell.accionesBotones = self
         
         return cell
@@ -95,14 +96,16 @@ extension ViewControllerReproductor: AccionesBotones {
         }
         let cancion = canciones[indexPath.row]
         reproducir(nombre: cancion.title)
+        tableView.reloadData()
+
     }
     
     func pausarAccion(cell: TableViewCell) {
         
         if reproductor?.isPlaying == true {
             reproductor?.pause()
-            print("Pausa canción: \(cancionActual ?? "")")
-            
+            tableView.reloadData()
+
         }
     }
     
@@ -135,6 +138,7 @@ extension ViewControllerReproductor {
         if acumulado.count == 3 {
             let cancion = acumulado[acumulado.count-1]
             reproducir(nombre: cancion)
+            tableView.reloadData()
             return
         }
         

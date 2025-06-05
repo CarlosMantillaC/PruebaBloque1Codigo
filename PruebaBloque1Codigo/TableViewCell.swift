@@ -18,11 +18,17 @@ class TableViewCell: UITableViewCell {
     
     private let nameLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 16)
+        label.font = .systemFont(ofSize: 16, weight: .medium)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .label
         return label
     }()
+    
+    private var isReproduciendo: Bool = false {
+        didSet {
+            nameLabel.textColor = isReproduciendo ? .systemBlue : .label
+        }
+    }
     
     private let botonReproducir: UIButton = {
         let button = UIButton(type: .system)
@@ -69,8 +75,9 @@ class TableViewCell: UITableViewCell {
     }
     
     
-    func configure(model: Cancion) {
+    func configure(model: Cancion, isReproduciendo: Bool) {
         nameLabel.text = model.title
+        self.isReproduciendo = isReproduciendo
     }
     
     @objc private func reproducirAccionBoton() {
