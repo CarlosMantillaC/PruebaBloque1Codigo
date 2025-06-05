@@ -27,7 +27,18 @@ class ViewControllerReproductor: UIViewController {
     private var cancionActual: String?
     
     private var tableView: UITableView!
-
+    
+    private lazy var randomButton: UIButton = {
+        
+        var configuration = UIButton.Configuration.bordered()
+        configuration.title = "Random"
+        configuration.buttonSize = .large
+        
+        let button = UIButton(type: .system, primaryAction: UIAction(handler: { _ in self.random() }))
+        button.configuration = configuration
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
     
     
     override func viewDidLoad() {
@@ -41,13 +52,16 @@ class ViewControllerReproductor: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
 
         view.addSubview(tableView)
+        view.addSubview(randomButton)
         
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor, constant: -10),
-    
+            tableView.bottomAnchor.constraint(equalTo: randomButton.topAnchor, constant: -10),
+            
+            randomButton.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor, constant: -10),
+            randomButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }
 
@@ -110,5 +124,39 @@ extension ViewControllerReproductor {
         } catch {
             print("Error al reproducir la canción: \(error)")
         }
+    }
+}
+
+extension ViewControllerReproductor {
+    
+    
+    private func random(n: Int = 0, divisor: Int = 2, acumulado: [String] = []) {
+        
+        if acumulado.count == 3 {
+            let cancion = acumulado[acumulado.count-1]
+            reproducir(nombre: cancion)
+            return
+        }
+        
+        if n < 2 {
+            random(n: n+1, acumulado: acumulado)
+            return
+        }
+        
+        if divisor*divisor > n {
+            
+            var nuevoAcumulado = acumulado
+            nuevoAcumulado.append(canciones[n].title)
+            random(n: n+1, divisor: 2, acumulado: nuevoAcumulado)
+            return
+        }
+        
+        if  n % divisor == 0 {
+            random(n: n+1, acumulado: acumulado)
+            return
+        }
+       
+        return random(n: n, divisor: divisor+1, acumulado: acumulado)
+        
     }
 }
