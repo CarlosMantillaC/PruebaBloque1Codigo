@@ -61,7 +61,7 @@ class ViewController: UIViewController {
         configuration.title = "Login"
         configuration.titleAlignment = .center
         
-        let button = UIButton(type: .system)
+        let button = UIButton(type: .system, primaryAction: UIAction(handler: { _ in self.login() }))
         button.configuration = configuration
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -109,6 +109,22 @@ class ViewController: UIViewController {
             registerButton.topAnchor.constraint(equalTo: contrasenaTextField.bottomAnchor, constant: 30),
             registerButton.leadingAnchor.constraint(equalTo: loginButton.trailingAnchor, constant: 30)
         ])
+    }
+
+
+    @objc private func login() {
+        let usuario = usuarioTextField.text ?? ""
+        let contrasena = contrasenaTextField.text ?? ""
+        
+        if usuario == usuarioValido && contrasena == contrasenaValida {
+            
+            self.navigationController?.pushViewController(ViewControllerReproductor(), animated: true)
+
+        } else {
+            let alerta = UIAlertController(title: "Error", message: "Credenciales Incorrectas", preferredStyle: .alert)
+            alerta.addAction(UIAlertAction(title: "OK", style: .default))
+            present(alerta, animated: true)
+        }
     }
     
     
