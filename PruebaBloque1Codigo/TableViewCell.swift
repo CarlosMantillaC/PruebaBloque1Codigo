@@ -8,8 +8,8 @@
 import UIKit
 
 protocol AccionesBotones: AnyObject {
-    func reproducirAccion(on cell: TableViewCell)
-    func pausarAccion(on cell: TableViewCell)
+    func reproducirAccion(cell: TableViewCell)
+    func pausarAccion(cell: TableViewCell)
 }
 
 class TableViewCell: UITableViewCell {
@@ -74,10 +74,10 @@ class TableViewCell: UITableViewCell {
     }
     
     @objc private func reproducirAccionBoton() {
-        accionesBotones?.reproducirAccion(on: self)
+        accionesBotones?.reproducirAccion(cell: self)
     }
     
     @objc private func pausarAccionBoton() {
-        accionesBotones?.pausarAccion(on: self)
+        accionesBotones?.pausarAccion(cell: self)
     }
 }
