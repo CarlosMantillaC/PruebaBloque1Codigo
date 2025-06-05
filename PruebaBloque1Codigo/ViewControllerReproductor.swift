@@ -27,18 +27,30 @@ class ViewControllerReproductor: UIViewController {
     private var cancionActual: String?
     
     private var tableView: UITableView!
+
     
-    override func loadView() {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
+        view.backgroundColor = .systemBackground
+
         tableView = UITableView()
-        
         tableView.dataSource = self
         tableView.register(TableViewCell.self, forCellReuseIdentifier: "TableViewCell")
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+
+        view.addSubview(tableView)
         
-        view = tableView
-        title = "Reproductor"
-        
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor, constant: -10),
+    
+        ])
     }
+
 
 }
 
