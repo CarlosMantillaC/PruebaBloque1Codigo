@@ -7,8 +7,14 @@
 
 import UIKit
 
+protocol AccionesBotones: AnyObject {
+    func reproducirAccion(on cell: TableViewCell)
+    func pausarAccion(on cell: TableViewCell)
+}
+
 class TableViewCell: UITableViewCell {
 
+    weak var accionesBotones: AccionesBotones?
     
     private let nameLabel: UILabel = {
         let label = UILabel()
@@ -18,14 +24,14 @@ class TableViewCell: UITableViewCell {
         return label
     }()
     
-    private let playButton: UIButton = {
+    private let botonReproducir: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("▶️", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
-    private let pauseButton: UIButton = {
+    private let botonPausar: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("⏸️", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -36,8 +42,8 @@ class TableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         contentView.addSubview(nameLabel)
-        contentView.addSubview(playButton)
-        contentView.addSubview(pauseButton)
+        contentView.addSubview(botonReproducir)
+        contentView.addSubview(botonPausar)
         
         NSLayoutConstraint.activate([
             nameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 24),
@@ -45,14 +51,17 @@ class TableViewCell: UITableViewCell {
             nameLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
             nameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -24),
             
-            pauseButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -24),
-            pauseButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            pauseButton.widthAnchor.constraint(equalToConstant: 40),
+            botonPausar.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -24),
+            botonPausar.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            botonPausar.widthAnchor.constraint(equalToConstant: 40),
             
-            playButton.trailingAnchor.constraint(equalTo: pauseButton.leadingAnchor, constant: -10),
-            playButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            playButton.widthAnchor.constraint(equalToConstant: 40),
+            botonReproducir.trailingAnchor.constraint(equalTo: botonPausar.leadingAnchor, constant: -10),
+            botonReproducir.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            botonReproducir.widthAnchor.constraint(equalToConstant: 40),
         ])
+        
+        botonReproducir.addTarget(self, action: #selector(reproducirAccionBoton), for: .touchUpInside)
+        botonPausar.addTarget(self, action: #selector(pausarAccionBoton), for: .touchUpInside)
     }
     
     required init?(coder: NSCoder) {
@@ -64,4 +73,11 @@ class TableViewCell: UITableViewCell {
         nameLabel.text = model.title
     }
     
+    @objc private func reproducirAccionBoton() {
+        accionesBotones?.reproducirAccion(on: self)
+    }
+    
+    @objc private func pausarAccionBoton() {
+        accionesBotones?.pausarAccion(on: self)
+    }
 }
