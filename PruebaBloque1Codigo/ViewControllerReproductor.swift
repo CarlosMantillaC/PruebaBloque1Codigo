@@ -94,19 +94,36 @@ extension ViewControllerReproductor: AccionesBotones {
         guard let indexPath = tableView.indexPath(for: cell) else {
             return
         }
+        
         let cancion = canciones[indexPath.row]
+        
+        if cancion.title == cancionActual {
+            if let reproductor = reproductor, !reproductor.isPlaying {
+                reproductor.play()
+                print("reanudando")
+                return
+            }
+        }
+        
         reproducir(nombre: cancion.title)
         tableView.reloadData()
 
     }
     
     func pausarAccion(cell: TableViewCell) {
-        
-        if reproductor?.isPlaying == true {
-            reproductor?.pause()
-            tableView.reloadData()
 
+        guard let indexPath = tableView.indexPath(for: cell) else {
+            return
         }
+        
+        let cancion = canciones[indexPath.row]
+        
+        if cancion.title == cancionActual && reproductor?.isPlaying == true {
+            reproductor?.pause()
+            print("Pausando canción: \(cancion.title)")
+            } else {
+            print("La canción del botón no está sonando")
+            }
     }
     
 }
