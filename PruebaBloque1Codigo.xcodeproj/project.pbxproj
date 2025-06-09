@@ -17,12 +17,14 @@
 		C4A82B322DF763AC000F4ADF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A82B2C2DF763AC000F4ADF /* SceneDelegate.swift */; };
 		C4A82B332DF763AC000F4ADF /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A82B2D2DF763AC000F4ADF /* TableViewCell.swift */; };
 		C4A82B342DF763AC000F4ADF /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A82B2E2DF763AC000F4ADF /* LoginViewController.swift */; };
-		C4A82B352DF763AC000F4ADF /* ViewControllerReproductor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A82B2F2DF763AC000F4ADF /* ViewControllerReproductor.swift */; };
+		C4A82B352DF763AC000F4ADF /* ReproductorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A82B2F2DF763AC000F4ADF /* ReproductorViewController.swift */; };
 		C4A82B362DF763AC000F4ADF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4A82B262DF763AC000F4ADF /* Assets.xcassets */; };
 		C4A82B382DF763AC000F4ADF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4A82B292DF763AC000F4ADF /* LaunchScreen.storyboard */; };
 		C4A82B392DF763AC000F4ADF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4A82B2B2DF763AC000F4ADF /* Main.storyboard */; };
-		C4A82B402DF76812000F4ADF /* Cancion.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A82B3F2DF76812000F4ADF /* Cancion.swift */; };
+		C4A82B402DF76812000F4ADF /* CancionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A82B3F2DF76812000F4ADF /* CancionModel.swift */; };
 		C4A82B442DF768BD000F4ADF /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A82B432DF768BD000F4ADF /* LoginPresenter.swift */; };
+		C4A82B462DF774FB000F4ADF /* ReproductorPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A82B452DF774FB000F4ADF /* ReproductorPresenter.swift */; };
+		C4A82B482DF77753000F4ADF /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A82B472DF77753000F4ADF /* LoginModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,9 +62,11 @@
 		C4A82B2C2DF763AC000F4ADF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		C4A82B2D2DF763AC000F4ADF /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		C4A82B2E2DF763AC000F4ADF /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		C4A82B2F2DF763AC000F4ADF /* ViewControllerReproductor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerReproductor.swift; sourceTree = "<group>"; };
-		C4A82B3F2DF76812000F4ADF /* Cancion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cancion.swift; sourceTree = "<group>"; };
+		C4A82B2F2DF763AC000F4ADF /* ReproductorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReproductorViewController.swift; sourceTree = "<group>"; };
+		C4A82B3F2DF76812000F4ADF /* CancionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancionModel.swift; sourceTree = "<group>"; };
 		C4A82B432DF768BD000F4ADF /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
+		C4A82B452DF774FB000F4ADF /* ReproductorPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReproductorPresenter.swift; sourceTree = "<group>"; };
+		C4A82B472DF77753000F4ADF /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -149,8 +153,6 @@
 				C4A82B292DF763AC000F4ADF /* LaunchScreen.storyboard */,
 				C4A82B2B2DF763AC000F4ADF /* Main.storyboard */,
 				C4A82B2C2DF763AC000F4ADF /* SceneDelegate.swift */,
-				C4A82B2D2DF763AC000F4ADF /* TableViewCell.swift */,
-				C4A82B2F2DF763AC000F4ADF /* ViewControllerReproductor.swift */,
 			);
 			path = PruebaBloque1Codigo;
 			sourceTree = "<group>";
@@ -159,6 +161,8 @@
 			isa = PBXGroup;
 			children = (
 				C4A82B2E2DF763AC000F4ADF /* LoginViewController.swift */,
+				C4A82B2F2DF763AC000F4ADF /* ReproductorViewController.swift */,
+				C4A82B2D2DF763AC000F4ADF /* TableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -167,6 +171,7 @@
 			isa = PBXGroup;
 			children = (
 				C4A82B432DF768BD000F4ADF /* LoginPresenter.swift */,
+				C4A82B452DF774FB000F4ADF /* ReproductorPresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -174,7 +179,8 @@
 		C4A82B3C2DF763C4000F4ADF /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				C4A82B3F2DF76812000F4ADF /* Cancion.swift */,
+				C4A82B3F2DF76812000F4ADF /* CancionModel.swift */,
+				C4A82B472DF77753000F4ADF /* LoginModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -333,9 +339,11 @@
 				C4A82B322DF763AC000F4ADF /* SceneDelegate.swift in Sources */,
 				C4A82B442DF768BD000F4ADF /* LoginPresenter.swift in Sources */,
 				C4A82B332DF763AC000F4ADF /* TableViewCell.swift in Sources */,
-				C4A82B402DF76812000F4ADF /* Cancion.swift in Sources */,
+				C4A82B402DF76812000F4ADF /* CancionModel.swift in Sources */,
 				C4A82B342DF763AC000F4ADF /* LoginViewController.swift in Sources */,
-				C4A82B352DF763AC000F4ADF /* ViewControllerReproductor.swift in Sources */,
+				C4A82B482DF77753000F4ADF /* LoginModel.swift in Sources */,
+				C4A82B462DF774FB000F4ADF /* ReproductorPresenter.swift in Sources */,
+				C4A82B352DF763AC000F4ADF /* ReproductorViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

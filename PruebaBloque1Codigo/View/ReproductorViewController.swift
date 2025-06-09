@@ -9,7 +9,7 @@ import UIKit
 import AVFoundation
 
 
-class ViewControllerReproductor: UIViewController {
+class ReproductorViewController: UIViewController {
     
     private var canciones: [Cancion] = [
         Cancion(title: "cancion1"),
@@ -65,7 +65,7 @@ class ViewControllerReproductor: UIViewController {
 
 }
 
-extension ViewControllerReproductor: UITableViewDataSource {
+extension ReproductorViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         canciones.count
@@ -84,7 +84,7 @@ extension ViewControllerReproductor: UITableViewDataSource {
     }
 }
 
-extension ViewControllerReproductor: AccionesBotones {
+extension ReproductorViewController: AccionesBotones {
     
     
     func reproducirAccion(cell: TableViewCell) {
@@ -126,7 +126,7 @@ extension ViewControllerReproductor: AccionesBotones {
 }
 
 
-extension ViewControllerReproductor {
+extension ReproductorViewController {
     
     func reproducir(nombre: String) {
         guard let url = Bundle.main.url(forResource: nombre, withExtension: "mp3") else {
@@ -144,7 +144,7 @@ extension ViewControllerReproductor {
     }
 }
 
-extension ViewControllerReproductor {
+extension ReproductorViewController {
     
     
     private func random(n: Int = 0, divisor: Int = 2, acumulado: [String] = []) {

@@ -137,7 +137,7 @@ extension LoginViewController: LoginView {
     }
     
     func navegarAlReproductor() {
-        self.navigationController?.pushViewController(ViewControllerReproductor(), animated: true)
+        self.navigationController?.pushViewController(ReproductorViewController(), animated: true)
 
     }
     

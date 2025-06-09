@@ -16,19 +16,18 @@ protocol LoginView: AnyObject {
 
 class LoginPresenter {
     weak var view: LoginView?
-    private let usuarioValido = "Admin"
-    private let contrasenaValida = "1234"
+    private let model: LoginModel
     
-    init(view: LoginView) {
+    init(view: LoginView, model: LoginModel = LoginModel()) {
         self.view = view
+        self.model = model
     }
     
     func login(usuario: String, contrasena: String) {
-        if usuario == usuarioValido && contrasena == contrasenaValida {
+        if model.validar(usuario: usuario, contrasena: contrasena) {
             view?.navegarAlReproductor()
         } else {
             view?.mostrarError("Credenciales Incorrectas")
         }
     }
 }
-
