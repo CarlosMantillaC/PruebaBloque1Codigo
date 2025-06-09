@@ -8,9 +8,6 @@
 import UIKit
 import AVFoundation
 
-struct Cancion {
-    let title: String
-}
 
 class ViewControllerReproductor: UIViewController {
     

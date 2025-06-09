@@ -7,11 +7,10 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class LoginViewController: UIViewController {
 
-    let usuarioValido = "Admin"
-    let contrasenaValida = "1234"
-    
+    var loginPresenter: LoginPresenter?
+
     private let usuarioLabel: UILabel = {
         
         let label = UILabel()
@@ -61,7 +60,7 @@ class ViewController: UIViewController {
         configuration.title = "Login"
         configuration.titleAlignment = .center
         
-        let button = UIButton(type: .system, primaryAction: UIAction(handler: { _ in self.login() }))
+        let button = UIButton(type: .system, primaryAction: UIAction(handler: { _ in self.loginButtonTapped() }))
         button.configuration = configuration
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -86,6 +85,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .white
+        
 
         [usuarioLabel, usuarioTextField, contrasenaLabel, contrasenaTextField, loginButton, registerButton].forEach(view.addSubview)
     
@@ -109,23 +109,36 @@ class ViewController: UIViewController {
             registerButton.topAnchor.constraint(equalTo: contrasenaTextField.bottomAnchor, constant: 30),
             registerButton.leadingAnchor.constraint(equalTo: loginButton.trailingAnchor, constant: 30)
         ])
+        
+        loginPresenter = LoginPresenter(view: self)
+
     }
+    
+}
 
-
-    @objc private func login() {
+    
+extension LoginViewController {
+    
+    func loginButtonTapped() {
         let usuario = usuarioTextField.text ?? ""
         let contrasena = contrasenaTextField.text ?? ""
         
-        if usuario == usuarioValido && contrasena == contrasenaValida {
-            
-            self.navigationController?.pushViewController(ViewControllerReproductor(), animated: true)
+        loginPresenter?.login(usuario: usuario, contrasena: contrasena)
+    }
+}
 
-        } else {
-            let alerta = UIAlertController(title: "Error", message: "Credenciales Incorrectas", preferredStyle: .alert)
-            alerta.addAction(UIAlertAction(title: "OK", style: .default))
-            present(alerta, animated: true)
-        }
+
+extension LoginViewController: LoginView {
+    
+    func mostrarError(_ mensaje: String) {
+        let alerta = UIAlertController(title: "Error", message: "Credenciales Incorrectas", preferredStyle: .alert)
+        alerta.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alerta, animated: true)
     }
     
+    func navegarAlReproductor() {
+        self.navigationController?.pushViewController(ViewControllerReproductor(), animated: true)
+
+    }
     
 }

@@ -24,7 +24,7 @@ class TableViewCell: UITableViewCell {
         return label
     }()
     
-    private var isReproduciendo: Bool = false {
+    private var isReproduciendo:     Bool = false {
         didSet {
             nameLabel.textColor = isReproduciendo ? .systemBlue : .label
         }
