@@ -6,15 +6,19 @@
 //
 
 import UIKit
-import AVFoundation
-
 
 class ReproductorViewController: UIViewController {
     
     var reproductorPresenter: ReproductorPresenter!
     
-    private var tableView: UITableView!
-    
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.dataSource = self
+        tableView.register(TableViewCell.self, forCellReuseIdentifier: "TableViewCell")
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        return tableView
+    }()
+        
     private lazy var randomButton: UIButton = {
         
         var configuration = UIButton.Configuration.bordered()
@@ -26,27 +30,22 @@ class ReproductorViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .systemBackground
         
-        tableView = UITableView()
-        tableView.dataSource = self
-        tableView.register(TableViewCell.self, forCellReuseIdentifier: "TableViewCell")
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        
         view.addSubview(tableView)
         view.addSubview(randomButton)
         
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: randomButton.topAnchor, constant: -10),
             
-            randomButton.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor, constant: -10),
+            randomButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
             randomButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
         
@@ -71,11 +70,9 @@ extension ReproductorViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as! TableViewCell
-        
-        guard let presenter = reproductorPresenter else { return cell }
-        
-        let model = presenter.cancionEn(index: indexPath.row)
-        let isReproduciendo = model.title == presenter.cancionActualTitulo()
+                
+        let model = reproductorPresenter.cancionEn(index: indexPath.row)
+        let isReproduciendo = model.title == reproductorPresenter.cancionActualTitulo()
         
         cell.configure(model: model, isReproduciendo: isReproduciendo)
         cell.accionesBotones = self
@@ -91,16 +88,17 @@ extension ReproductorViewController: AccionesBotones {
             return
         }
         
-        let cancion = reproductorPresenter!.cancionEn(index: indexPath.row)
+        let cancion = reproductorPresenter.cancionEn(index: indexPath.row)
         
         if cancion.title == reproductorPresenter.cancionActualTitulo() {
             if !reproductorPresenter.estaReproduciendo() {
                 reproductorPresenter.reanudar()
+                print("reanudando")
                 return
             }
         }
         
-        reproductorPresenter!.reproducir(nombre: cancion.title)
+        reproductorPresenter.reproducir(nombre: cancion.title)
         recargarTabla()
     }
     
@@ -110,10 +108,11 @@ extension ReproductorViewController: AccionesBotones {
             return
         }
         
-        let cancion = reproductorPresenter!.cancionEn(index: indexPath.row)
+        let cancion = reproductorPresenter.cancionEn(index: indexPath.row)
         
         if cancion.title == reproductorPresenter.cancionActualTitulo() && reproductorPresenter.estaReproduciendo() == true {
             reproductorPresenter.pausar()
+            print("pausando")
             
         }
         

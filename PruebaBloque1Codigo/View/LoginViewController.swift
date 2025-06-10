@@ -130,7 +130,7 @@ extension LoginViewController {
 
 extension LoginViewController: LoginView {
     
-    func mostrarError(_ mensaje: String) {
+    func mostrarError() {
         let alerta = UIAlertController(title: "Error", message: "Credenciales Incorrectas", preferredStyle: .alert)
         alerta.addAction(UIAlertAction(title: "OK", style: .default))
         present(alerta, animated: true)

@@ -9,7 +9,7 @@ import Foundation
 
 protocol LoginView: AnyObject {
     
-    func mostrarError(_ mensaje: String)
+    func mostrarError()
     func navegarAlReproductor()
     
 }
@@ -27,7 +27,7 @@ class LoginPresenter {
         if model.validar(usuario: usuario, contrasena: contrasena) {
             view?.navegarAlReproductor()
         } else {
-            view?.mostrarError("Credenciales Incorrectas")
+            view?.mostrarError()
         }
     }
 }

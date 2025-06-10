@@ -74,11 +74,7 @@ class ReproductorPresenter {
              reproducir(nombre: cancion)
              return
          }
-
-         if n >= numeroDeCanciones() {
-             return
-         }
-
+         
          if n < 2 {
              random(n: n+1, acumulado: acumulado)
              return
