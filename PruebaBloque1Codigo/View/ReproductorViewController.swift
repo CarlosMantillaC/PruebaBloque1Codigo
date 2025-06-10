@@ -11,17 +11,7 @@ import AVFoundation
 
 class ReproductorViewController: UIViewController {
     
-    private var canciones: [Cancion] = [
-        Cancion(title: "cancion1"),
-        Cancion(title: "cancion2"),
-        Cancion(title: "cancion3"),
-        Cancion(title: "cancion4"),
-        Cancion(title: "cancion5"),
-        Cancion(title: "cancion6"),
-    ]
-    
-    private var reproductor: AVAudioPlayer?
-    private var cancionActual: String?
+    var reproductorPresenter: ReproductorPresenter!
     
     private var tableView: UITableView!
     
@@ -31,23 +21,22 @@ class ReproductorViewController: UIViewController {
         configuration.title = "Random"
         configuration.buttonSize = .large
         
-        let button = UIButton(type: .system, primaryAction: UIAction(handler: { _ in self.random() }))
+        let button = UIButton(type: .system, primaryAction: UIAction(handler: { _ in self.reproductorPresenter.reproducirAleatoria() }))
         button.configuration = configuration
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .systemBackground
-
+        
         tableView = UITableView()
         tableView.dataSource = self
         tableView.register(TableViewCell.self, forCellReuseIdentifier: "TableViewCell")
         tableView.translatesAutoresizingMaskIntoConstraints = false
-
+        
         view.addSubview(tableView)
         view.addSubview(randomButton)
         
@@ -60,23 +49,34 @@ class ReproductorViewController: UIViewController {
             randomButton.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor, constant: -10),
             randomButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
+        
+        reproductorPresenter = ReproductorPresenter(view: self)
     }
-
-
 }
+
+extension ReproductorViewController: ReproductorView {
+    
+    func recargarTabla() {
+        tableView.reloadData()
+    }
+}
+
 
 extension ReproductorViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        canciones.count
+        (reproductorPresenter?.numeroDeCanciones())!
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as! TableViewCell
         
-        let model = canciones[indexPath.row]
-        let isReproduciendo = model.title == cancionActual
+        guard let presenter = reproductorPresenter else { return cell }
+        
+        let model = presenter.cancionEn(index: indexPath.row)
+        let isReproduciendo = model.title == presenter.cancionActualTitulo()
+        
         cell.configure(model: model, isReproduciendo: isReproduciendo)
         cell.accionesBotones = self
         
@@ -86,95 +86,37 @@ extension ReproductorViewController: UITableViewDataSource {
 
 extension ReproductorViewController: AccionesBotones {
     
-    
     func reproducirAccion(cell: TableViewCell) {
         guard let indexPath = tableView.indexPath(for: cell) else {
             return
         }
         
-        let cancion = canciones[indexPath.row]
+        let cancion = reproductorPresenter!.cancionEn(index: indexPath.row)
         
-        if cancion.title == cancionActual {
-            if let reproductor = reproductor, !reproductor.isPlaying {
-                reproductor.play()
-                print("reanudando")
+        if cancion.title == reproductorPresenter.cancionActualTitulo() {
+            if !reproductorPresenter.estaReproduciendo() {
+                reproductorPresenter.reanudar()
                 return
             }
         }
         
-        reproducir(nombre: cancion.title)
-        tableView.reloadData()
-
+        reproductorPresenter!.reproducir(nombre: cancion.title)
+        recargarTabla()
     }
     
     func pausarAccion(cell: TableViewCell) {
-
+        
         guard let indexPath = tableView.indexPath(for: cell) else {
             return
         }
         
-        let cancion = canciones[indexPath.row]
+        let cancion = reproductorPresenter!.cancionEn(index: indexPath.row)
         
-        if cancion.title == cancionActual && reproductor?.isPlaying == true {
-            reproductor?.pause()
-            print("Pausando canción: \(cancion.title)")
-            } else {
-            print("La canción del botón no está sonando")
-            }
-    }
-    
-}
-
-
-extension ReproductorViewController {
-    
-    func reproducir(nombre: String) {
-        guard let url = Bundle.main.url(forResource: nombre, withExtension: "mp3") else {
-            print("No se encontró el archivo \(nombre).mp3")
-            return
-        }
-        do {
-            reproductor = try AVAudioPlayer(contentsOf: url)
-            reproductor?.play()
-            cancionActual = nombre
-            print("Reproduciendo: \(nombre)")
-        } catch {
-            print("Error al reproducir la canción: \(error)")
-        }
-    }
-}
-
-extension ReproductorViewController {
-    
-    
-    private func random(n: Int = 0, divisor: Int = 2, acumulado: [String] = []) {
-        
-        if acumulado.count == 3 {
-            let cancion = acumulado[acumulado.count-1]
-            reproducir(nombre: cancion)
-            tableView.reloadData()
-            return
-        }
-        
-        if n < 2 {
-            random(n: n+1, acumulado: acumulado)
-            return
-        }
-        
-        if divisor*divisor > n {
+        if cancion.title == reproductorPresenter.cancionActualTitulo() && reproductorPresenter.estaReproduciendo() == true {
+            reproductorPresenter.pausar()
             
-            var nuevoAcumulado = acumulado
-            nuevoAcumulado.append(canciones[n].title)
-            random(n: n+1, divisor: 2, acumulado: nuevoAcumulado)
-            return
         }
-        
-        if  n % divisor == 0 {
-            random(n: n+1, acumulado: acumulado)
-            return
-        }
-       
-        return random(n: n, divisor: divisor+1, acumulado: acumulado)
         
     }
+    
 }
