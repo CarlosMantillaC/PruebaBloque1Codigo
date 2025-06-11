@@ -68,31 +68,32 @@ class ReproductorPresenter {
          random()
      }
 
-     private func random(n: Int = 0, divisor: Int = 2, acumulado: [String] = []) {
-         if acumulado.count == 3 {
-             let cancion = acumulado.last!
-             reproducir(nombre: cancion)
-             return
-         }
-         
-         if n < 2 {
-             random(n: n+1, acumulado: acumulado)
-             return
-         }
-
-         if divisor * divisor > n {
-             var nuevoAcumulado = acumulado
-             nuevoAcumulado.append(model.obtenerCanciones()[n].title)
-             random(n: n+1, divisor: 2, acumulado: nuevoAcumulado)
-             return
-         }
-
-         if n % divisor == 0 {
-             random(n: n+1, acumulado: acumulado)
-             return
-         }
-
-         random(n: n, divisor: divisor+1, acumulado: acumulado)
-     }
-    
+    private func random(n: Int = 0, divisor: Int = 2, acumulado: [Int] = []) {
+        
+        if acumulado.count == 3 {
+            
+            let cancion = acumulado[acumulado.count-1]
+            reproducir(nombre: cancionEn(index: cancion-1).title)
+            return
+        }
+        
+        if n < 2 {
+            random(n: n+1, acumulado: acumulado)
+            return
+        }
+        
+        if divisor * divisor > n {
+            var nuevoAcumulado = acumulado
+            nuevoAcumulado.append(n)
+            random(n: n+1, divisor: 2, acumulado: nuevoAcumulado)
+            return
+        }
+        
+        if n % divisor == 0 {
+            random(n: n+1, acumulado: acumulado)
+            return
+        }
+        
+        random(n: n, divisor: divisor+1, acumulado: acumulado)
+    }
 }
