@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import AVFoundation
 
 protocol ReproductorView: AnyObject {
     func recargarTabla()
@@ -14,14 +13,13 @@ protocol ReproductorView: AnyObject {
 
 class ReproductorPresenter {
     private let model = ReproductorModel()
+    private let reproductorService: AudioPlayerService
     weak var view: ReproductorView?
-    private var reproductor: AVAudioPlayer?
-    
-    
     private var cancionActual: String?
     
-    init(view: ReproductorView) {
+    init(view: ReproductorView, reproductorService: AudioPlayerService) {
         self.view = view
+        self.reproductorService = reproductorService
     }
     
     func numeroDeCanciones() -> Int {
@@ -37,60 +35,28 @@ class ReproductorPresenter {
     }
     
     func reproducir(nombre: String) {
-        guard let url = Bundle.main.url(forResource: nombre, withExtension: "mp3") else {
-            print("No se encontró el archivo \(nombre).mp3")
-            return
-        }
-        do {
-            reproductor = try AVAudioPlayer(contentsOf: url)
-            reproductor?.play()
-            cancionActual = nombre
-            print("Reproduciendo: \(nombre)")
-            view?.recargarTabla()
-        } catch {
-            print("Error al reproducir la canción: \(error)")
-        }
+        reproductorService.play(nombre: nombre)
+        cancionActual = nombre
+        view?.recargarTabla()
     }
     
     func pausar() {
-        reproductor?.pause()
+        reproductorService.pause()
     }
 
     func reanudar() {
-        reproductor?.play()
+        reproductorService.resume()
     }
     
     func estaReproduciendo() -> Bool {
-        return reproductor?.isPlaying ?? false
+        return reproductorService.isPlaying()
     }
     
     func reproducirAleatoria() {
-        
-        reproducir(nombre: cancionEn(index: random()-1).title)
-     }
-
-    private func random(n: Int = 0, divisor: Int = 2, acumulado: [Int] = []) -> Int {
-        
-        if acumulado.count == 3 {
-            return acumulado[acumulado.count-1]
-        }
-        
-        if n < 2 {
-            return random(n: n+1, acumulado: acumulado)
-        }
-        
-        if divisor * divisor > n {
-            var nuevoAcumulado = acumulado
-            nuevoAcumulado.append(n)
-            return random(n: n+1, divisor: 2, acumulado: nuevoAcumulado)
-        }
-        
-        if n % divisor == 0 {
-            return random(n: n+1, acumulado: acumulado)
-        }
-        
-        return random(n: n, divisor: divisor+1, acumulado: acumulado)
+        reproducir(nombre: cancionEn(index: model.random() - 1).title)
     }
-
     
+
+   
 }
+

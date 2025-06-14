@@ -49,7 +49,8 @@ class ReproductorViewController: UIViewController {
             randomButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
         
-        reproductorPresenter = ReproductorPresenter(view: self)
+        let audioService = AVAudioPlayerService()
+        reproductorPresenter = ReproductorPresenter(view: self, reproductorService: audioService)
     }
 }
 
