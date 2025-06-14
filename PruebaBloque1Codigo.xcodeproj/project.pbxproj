@@ -25,6 +25,10 @@
 		C4A82B442DF768BD000F4ADF /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A82B432DF768BD000F4ADF /* LoginPresenter.swift */; };
 		C4A82B462DF774FB000F4ADF /* ReproductorPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A82B452DF774FB000F4ADF /* ReproductorPresenter.swift */; };
 		C4A82B482DF77753000F4ADF /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A82B472DF77753000F4ADF /* LoginModel.swift */; };
+		C4F574472DFDCE4900A4B9BC /* Cancion.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F574462DFDCE4900A4B9BC /* Cancion.swift */; };
+		C4F574492DFDCE6500A4B9BC /* Usuario.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F574482DFDCE6500A4B9BC /* Usuario.swift */; };
+		C4F5744E2DFDCED900A4B9BC /* AudioPlayerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F5744D2DFDCED900A4B9BC /* AudioPlayerService.swift */; };
+		C4F574502DFDCEF100A4B9BC /* AVAudioPlayerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F5744F2DFDCEF100A4B9BC /* AVAudioPlayerService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +71,10 @@
 		C4A82B432DF768BD000F4ADF /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
 		C4A82B452DF774FB000F4ADF /* ReproductorPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReproductorPresenter.swift; sourceTree = "<group>"; };
 		C4A82B472DF77753000F4ADF /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
+		C4F574462DFDCE4900A4B9BC /* Cancion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cancion.swift; sourceTree = "<group>"; };
+		C4F574482DFDCE6500A4B9BC /* Usuario.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Usuario.swift; sourceTree = "<group>"; };
+		C4F5744D2DFDCED900A4B9BC /* AudioPlayerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerService.swift; sourceTree = "<group>"; };
+		C4F5744F2DFDCEF100A4B9BC /* AVAudioPlayerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVAudioPlayerService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -144,6 +152,7 @@
 		C4A82B302DF763AC000F4ADF /* PruebaBloque1Codigo */ = {
 			isa = PBXGroup;
 			children = (
+				C4F5744C2DFDCEC400A4B9BC /* Services */,
 				C4A82B3C2DF763C4000F4ADF /* Model */,
 				C4A82B3B2DF763BC000F4ADF /* Presenter */,
 				C4A82B3A2DF763B1000F4ADF /* View */,
@@ -181,8 +190,19 @@
 			children = (
 				C4A82B3F2DF76812000F4ADF /* ReproductorModel.swift */,
 				C4A82B472DF77753000F4ADF /* LoginModel.swift */,
+				C4F574462DFDCE4900A4B9BC /* Cancion.swift */,
+				C4F574482DFDCE6500A4B9BC /* Usuario.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		C4F5744C2DFDCEC400A4B9BC /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				C4F5744D2DFDCED900A4B9BC /* AudioPlayerService.swift */,
+				C4F5744F2DFDCEF100A4B9BC /* AVAudioPlayerService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -337,13 +357,17 @@
 			files = (
 				C4A82B312DF763AC000F4ADF /* AppDelegate.swift in Sources */,
 				C4A82B322DF763AC000F4ADF /* SceneDelegate.swift in Sources */,
+				C4F574502DFDCEF100A4B9BC /* AVAudioPlayerService.swift in Sources */,
 				C4A82B442DF768BD000F4ADF /* LoginPresenter.swift in Sources */,
+				C4F574472DFDCE4900A4B9BC /* Cancion.swift in Sources */,
 				C4A82B332DF763AC000F4ADF /* TableViewCell.swift in Sources */,
 				C4A82B402DF76812000F4ADF /* ReproductorModel.swift in Sources */,
 				C4A82B342DF763AC000F4ADF /* LoginViewController.swift in Sources */,
 				C4A82B482DF77753000F4ADF /* LoginModel.swift in Sources */,
 				C4A82B462DF774FB000F4ADF /* ReproductorPresenter.swift in Sources */,
 				C4A82B352DF763AC000F4ADF /* ReproductorViewController.swift in Sources */,
+				C4F574492DFDCE6500A4B9BC /* Usuario.swift in Sources */,
+				C4F5744E2DFDCED900A4B9BC /* AudioPlayerService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,12 +8,6 @@
 import Foundation
 
 
-struct Usuario {
-    
-    let nombre: String
-    let contrasena: String
-}
-
 class LoginModel {
     private let usuarioValido = Usuario(nombre: "Admin", contrasena: "1234")
     
