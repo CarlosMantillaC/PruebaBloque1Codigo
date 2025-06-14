@@ -6,8 +6,6 @@
 //
 
 import Foundation
-import AVFoundation
-
 
 class ReproductorModel {
     private(set) var canciones: [Cancion] = [
