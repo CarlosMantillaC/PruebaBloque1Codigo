@@ -7,14 +7,14 @@
 
 import UIKit
 
-protocol AccionesBotones: AnyObject {
-    func reproducirAccion(cell: TableViewCell)
-    func pausarAccion(cell: TableViewCell)
+protocol ActionButtons: AnyObject {
+    func playAction(cell: TableViewCell)
+    func pauseAction(cell: TableViewCell)
 }
 
 class TableViewCell: UITableViewCell {
     
-    weak var accionesBotones: AccionesBotones?
+    weak var actionButtons: ActionButtons?
     
     private let nameLabel: UILabel = {
         let label = UILabel()
@@ -30,16 +30,16 @@ class TableViewCell: UITableViewCell {
         }
     }
     
-    private lazy var botonReproducir: UIButton = {
-        let button = UIButton(type: .system, primaryAction: UIAction(handler: { _ in self.reproducirAccionBoton() }))
+    private lazy var playButton: UIButton = {
+        let button = UIButton(type: .system, primaryAction: UIAction(handler: { _ in self.playButtonTapped() }))
         let image = UIImage(systemName: "play.fill")
         button.setImage(image, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
 
-    private lazy var botonPausar: UIButton = {
-        let button = UIButton(type: .system, primaryAction: UIAction(handler: { _ in self.pausarAccionBoton() }))
+    private lazy var pauseButton: UIButton = {
+        let button = UIButton(type: .system, primaryAction: UIAction(handler: { _ in self.pauseButtonTapped() }))
         let image = UIImage(systemName: "pause.fill")
         button.setImage(image, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -49,21 +49,20 @@ class TableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
-        [nameLabel, botonReproducir, botonPausar].forEach(contentView.addSubview)
+        [nameLabel, playButton, pauseButton].forEach(contentView.addSubview)
         
         NSLayoutConstraint.activate([
             nameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 24),
             nameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             nameLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
-            nameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -24),
             
-            botonReproducir.trailingAnchor.constraint(equalTo: botonPausar.leadingAnchor, constant: -10),
-            botonReproducir.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            botonReproducir.widthAnchor.constraint(equalToConstant: 40),
+            playButton.trailingAnchor.constraint(equalTo: pauseButton.leadingAnchor, constant: -10),
+            playButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            playButton.widthAnchor.constraint(equalToConstant: 40),
             
-            botonPausar.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -24),
-            botonPausar.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            botonPausar.widthAnchor.constraint(equalToConstant: 40),
+            pauseButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -24),
+            pauseButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            pauseButton.widthAnchor.constraint(equalToConstant: 40),
 
         ])
         
@@ -74,16 +73,16 @@ class TableViewCell: UITableViewCell {
     }
     
     
-    func configure(model: Cancion, isReproduciendo: Bool) {
+    func configure(model: Song, isReproduciendo: Bool) {
         nameLabel.text = model.title
         self.isReproduciendo = isReproduciendo
     }
     
-    private func reproducirAccionBoton() {
-        accionesBotones?.reproducirAccion(cell: self)
+    private func playButtonTapped() {
+        actionButtons?.playAction(cell: self)
     }
     
-    private func pausarAccionBoton() {
-        accionesBotones?.pausarAccion(cell: self)
+    private func pauseButtonTapped() {
+        actionButtons?.pauseAction(cell: self)
     }
 }

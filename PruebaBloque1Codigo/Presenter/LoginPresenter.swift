@@ -9,8 +9,8 @@ import Foundation
 
 protocol LoginView: AnyObject {
     
-    func mostrarError()
-    func navegarAlReproductor()
+    func showError()
+    func navigatePlayer()
     
 }
 
@@ -23,11 +23,11 @@ class LoginPresenter {
         self.model = model
     }
     
-    func login(usuario: String, contrasena: String) {
-        if model.validar(usuario: usuario, contrasena: contrasena) {
-            view?.navegarAlReproductor()
+    func login(user: String, password: String) {
+        if model.validate(user: user, password: password) {
+            view?.navigatePlayer()
         } else {
-            view?.mostrarError()
+            view?.showError()
         }
     }
 }

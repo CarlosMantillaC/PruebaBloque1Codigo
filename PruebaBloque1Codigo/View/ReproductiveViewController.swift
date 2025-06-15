@@ -7,9 +7,9 @@
 
 import UIKit
 
-class ReproductorViewController: UIViewController {
+class ReproductiveViewController: UIViewController {
     
-    var reproductorPresenter: ReproductorPresenter!
+    var reproductivePresenter: ReproductivePresenter!
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
@@ -17,6 +17,7 @@ class ReproductorViewController: UIViewController {
         tableView.register(TableViewCell.self, forCellReuseIdentifier: "TableViewCell")
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
+        
     }()
         
     private lazy var randomButton: UIButton = {
@@ -25,7 +26,7 @@ class ReproductorViewController: UIViewController {
         configuration.title = "Random"
         configuration.buttonSize = .large
         
-        let button = UIButton(type: .system, primaryAction: UIAction(handler: { _ in self.reproductorPresenter.reproducirAleatoria() }))
+        let button = UIButton(type: .system, primaryAction: UIAction(handler: { _ in self.reproductivePresenter.randomSong() }))
         button.configuration = configuration
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -34,10 +35,11 @@ class ReproductorViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        reproductivePresenter = ReproductivePresenter(view: self)
+
         view.backgroundColor = .systemBackground
         
-        view.addSubview(tableView)
-        view.addSubview(randomButton)
+        [tableView, randomButton].forEach(view.addSubview)
         
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -49,71 +51,66 @@ class ReproductorViewController: UIViewController {
             randomButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
         
-        let audioService = AVAudioPlayerService()
-        reproductorPresenter = ReproductorPresenter(view: self, reproductorService: audioService)
     }
 }
 
-extension ReproductorViewController: ReproductorView {
+extension ReproductiveViewController: ReproductiveView {
     
-    func recargarTabla() {
+    func reloadTable() {
         tableView.reloadData()
     }
 }
 
 
-extension ReproductorViewController: UITableViewDataSource {
+extension ReproductiveViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        (reproductorPresenter?.numeroDeCanciones())!
+        reproductivePresenter.numberSongs()
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as! TableViewCell
                 
-        let model = reproductorPresenter.cancionEn(index: indexPath.row)
-        let isReproduciendo = model.title == reproductorPresenter.cancionActualTitulo()
+        let model = reproductivePresenter.songIn(index: indexPath.row)
+        let isReproduciendo = model.title == reproductivePresenter.currentSongTitle()
         
         cell.configure(model: model, isReproduciendo: isReproduciendo)
-        cell.accionesBotones = self
+        cell.actionButtons = self
         
         return cell
     }
 }
 
-extension ReproductorViewController: AccionesBotones {
+extension ReproductiveViewController: ActionButtons {
     
-    func reproducirAccion(cell: TableViewCell) {
+    func playAction(cell: TableViewCell) {
         guard let indexPath = tableView.indexPath(for: cell) else {
             return
         }
         
-        let cancion = reproductorPresenter.cancionEn(index: indexPath.row)
+        let song = reproductivePresenter.songIn(index: indexPath.row)
         
-        if cancion.title == reproductorPresenter.cancionActualTitulo() {
-            if !reproductorPresenter.estaReproduciendo() {
-                reproductorPresenter.reanudar()
-                print("reanudando")
+        if song.title == reproductivePresenter.currentSongTitle() {
+            if !reproductivePresenter.isPlaying() {
+                reproductivePresenter.resume()
                 return
             }
         }
         
-        reproductorPresenter.reproducir(nombre: cancion.title)
-        recargarTabla()
+        reproductivePresenter.reproduce(name: song.title)
     }
     
-    func pausarAccion(cell: TableViewCell) {
+    func pauseAction(cell: TableViewCell) {
         
         guard let indexPath = tableView.indexPath(for: cell) else {
             return
         }
         
-        let cancion = reproductorPresenter.cancionEn(index: indexPath.row)
+        let song = reproductivePresenter.songIn(index: indexPath.row)
         
-        if cancion.title == reproductorPresenter.cancionActualTitulo() && reproductorPresenter.estaReproduciendo() == true {
-            reproductorPresenter.pausar()
-            print("pausando")
+        if song.title == reproductivePresenter.currentSongTitle() && reproductivePresenter.isPlaying() == true {
+            reproductivePresenter.pause()
             
         }
         

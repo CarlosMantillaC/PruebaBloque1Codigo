@@ -17,16 +17,16 @@
 		C4A82B322DF763AC000F4ADF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A82B2C2DF763AC000F4ADF /* SceneDelegate.swift */; };
 		C4A82B332DF763AC000F4ADF /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A82B2D2DF763AC000F4ADF /* TableViewCell.swift */; };
 		C4A82B342DF763AC000F4ADF /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A82B2E2DF763AC000F4ADF /* LoginViewController.swift */; };
-		C4A82B352DF763AC000F4ADF /* ReproductorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A82B2F2DF763AC000F4ADF /* ReproductorViewController.swift */; };
+		C4A82B352DF763AC000F4ADF /* ReproductiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A82B2F2DF763AC000F4ADF /* ReproductiveViewController.swift */; };
 		C4A82B362DF763AC000F4ADF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4A82B262DF763AC000F4ADF /* Assets.xcassets */; };
 		C4A82B382DF763AC000F4ADF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4A82B292DF763AC000F4ADF /* LaunchScreen.storyboard */; };
 		C4A82B392DF763AC000F4ADF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4A82B2B2DF763AC000F4ADF /* Main.storyboard */; };
-		C4A82B402DF76812000F4ADF /* ReproductorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A82B3F2DF76812000F4ADF /* ReproductorModel.swift */; };
+		C4A82B402DF76812000F4ADF /* ReproductiveModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A82B3F2DF76812000F4ADF /* ReproductiveModel.swift */; };
 		C4A82B442DF768BD000F4ADF /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A82B432DF768BD000F4ADF /* LoginPresenter.swift */; };
-		C4A82B462DF774FB000F4ADF /* ReproductorPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A82B452DF774FB000F4ADF /* ReproductorPresenter.swift */; };
+		C4A82B462DF774FB000F4ADF /* ReproductivePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A82B452DF774FB000F4ADF /* ReproductivePresenter.swift */; };
 		C4A82B482DF77753000F4ADF /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A82B472DF77753000F4ADF /* LoginModel.swift */; };
-		C4F574472DFDCE4900A4B9BC /* Cancion.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F574462DFDCE4900A4B9BC /* Cancion.swift */; };
-		C4F574492DFDCE6500A4B9BC /* Usuario.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F574482DFDCE6500A4B9BC /* Usuario.swift */; };
+		C4F574472DFDCE4900A4B9BC /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F574462DFDCE4900A4B9BC /* Song.swift */; };
+		C4F574492DFDCE6500A4B9BC /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F574482DFDCE6500A4B9BC /* User.swift */; };
 		C4F5744E2DFDCED900A4B9BC /* AudioPlayerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F5744D2DFDCED900A4B9BC /* AudioPlayerService.swift */; };
 		C4F574502DFDCEF100A4B9BC /* AVAudioPlayerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F5744F2DFDCEF100A4B9BC /* AVAudioPlayerService.swift */; };
 /* End PBXBuildFile section */
@@ -66,13 +66,13 @@
 		C4A82B2C2DF763AC000F4ADF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		C4A82B2D2DF763AC000F4ADF /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		C4A82B2E2DF763AC000F4ADF /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		C4A82B2F2DF763AC000F4ADF /* ReproductorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReproductorViewController.swift; sourceTree = "<group>"; };
-		C4A82B3F2DF76812000F4ADF /* ReproductorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReproductorModel.swift; sourceTree = "<group>"; };
+		C4A82B2F2DF763AC000F4ADF /* ReproductiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReproductiveViewController.swift; sourceTree = "<group>"; };
+		C4A82B3F2DF76812000F4ADF /* ReproductiveModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReproductiveModel.swift; sourceTree = "<group>"; };
 		C4A82B432DF768BD000F4ADF /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
-		C4A82B452DF774FB000F4ADF /* ReproductorPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReproductorPresenter.swift; sourceTree = "<group>"; };
+		C4A82B452DF774FB000F4ADF /* ReproductivePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReproductivePresenter.swift; sourceTree = "<group>"; };
 		C4A82B472DF77753000F4ADF /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
-		C4F574462DFDCE4900A4B9BC /* Cancion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cancion.swift; sourceTree = "<group>"; };
-		C4F574482DFDCE6500A4B9BC /* Usuario.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Usuario.swift; sourceTree = "<group>"; };
+		C4F574462DFDCE4900A4B9BC /* Song.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
+		C4F574482DFDCE6500A4B9BC /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		C4F5744D2DFDCED900A4B9BC /* AudioPlayerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerService.swift; sourceTree = "<group>"; };
 		C4F5744F2DFDCEF100A4B9BC /* AVAudioPlayerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVAudioPlayerService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -170,7 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				C4A82B2E2DF763AC000F4ADF /* LoginViewController.swift */,
-				C4A82B2F2DF763AC000F4ADF /* ReproductorViewController.swift */,
+				C4A82B2F2DF763AC000F4ADF /* ReproductiveViewController.swift */,
 				C4A82B2D2DF763AC000F4ADF /* TableViewCell.swift */,
 			);
 			path = View;
@@ -180,7 +180,7 @@
 			isa = PBXGroup;
 			children = (
 				C4A82B432DF768BD000F4ADF /* LoginPresenter.swift */,
-				C4A82B452DF774FB000F4ADF /* ReproductorPresenter.swift */,
+				C4A82B452DF774FB000F4ADF /* ReproductivePresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -188,10 +188,10 @@
 		C4A82B3C2DF763C4000F4ADF /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				C4A82B3F2DF76812000F4ADF /* ReproductorModel.swift */,
+				C4A82B3F2DF76812000F4ADF /* ReproductiveModel.swift */,
 				C4A82B472DF77753000F4ADF /* LoginModel.swift */,
-				C4F574462DFDCE4900A4B9BC /* Cancion.swift */,
-				C4F574482DFDCE6500A4B9BC /* Usuario.swift */,
+				C4F574462DFDCE4900A4B9BC /* Song.swift */,
+				C4F574482DFDCE6500A4B9BC /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -359,14 +359,14 @@
 				C4A82B322DF763AC000F4ADF /* SceneDelegate.swift in Sources */,
 				C4F574502DFDCEF100A4B9BC /* AVAudioPlayerService.swift in Sources */,
 				C4A82B442DF768BD000F4ADF /* LoginPresenter.swift in Sources */,
-				C4F574472DFDCE4900A4B9BC /* Cancion.swift in Sources */,
+				C4F574472DFDCE4900A4B9BC /* Song.swift in Sources */,
 				C4A82B332DF763AC000F4ADF /* TableViewCell.swift in Sources */,
-				C4A82B402DF76812000F4ADF /* ReproductorModel.swift in Sources */,
+				C4A82B402DF76812000F4ADF /* ReproductiveModel.swift in Sources */,
 				C4A82B342DF763AC000F4ADF /* LoginViewController.swift in Sources */,
 				C4A82B482DF77753000F4ADF /* LoginModel.swift in Sources */,
-				C4A82B462DF774FB000F4ADF /* ReproductorPresenter.swift in Sources */,
-				C4A82B352DF763AC000F4ADF /* ReproductorViewController.swift in Sources */,
-				C4F574492DFDCE6500A4B9BC /* Usuario.swift in Sources */,
+				C4A82B462DF774FB000F4ADF /* ReproductivePresenter.swift in Sources */,
+				C4A82B352DF763AC000F4ADF /* ReproductiveViewController.swift in Sources */,
+				C4F574492DFDCE6500A4B9BC /* User.swift in Sources */,
 				C4F5744E2DFDCED900A4B9BC /* AudioPlayerService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

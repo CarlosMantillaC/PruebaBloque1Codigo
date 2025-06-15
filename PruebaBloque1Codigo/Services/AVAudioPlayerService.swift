@@ -11,26 +11,28 @@ import AVFoundation
 class AVAudioPlayerService: AudioPlayerService {
     private var player: AVAudioPlayer?
     
-    func play(nombre: String) {
-        guard let url = Bundle.main.url(forResource: nombre, withExtension: "mp3") else {
-            print("No se encontró el archivo: \(nombre).mp3")
+    func play(name: String) {
+        guard let url = Bundle.main.url(forResource: name, withExtension: "mp3") else {
+            print("File not found: \(name).mp3")
             return
         }
         do {
             player = try AVAudioPlayer(contentsOf: url)
             player?.play()
-            print("Reproduciendo: \(nombre)")
+            print("Playing: \(name)")
         } catch {
-            print("Error al reproducir el audio: \(error)")
+            print("Error playing audio: \(error)")
         }
     }
     
     func pause() {
         player?.pause()
+        print("Slow song")
     }
     
     func resume() {
         player?.play()
+        print("Resuming song")
     }
     
     func isPlaying() -> Bool {

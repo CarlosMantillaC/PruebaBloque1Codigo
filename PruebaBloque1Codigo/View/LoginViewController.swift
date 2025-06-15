@@ -11,7 +11,7 @@ class LoginViewController: UIViewController {
 
     var loginPresenter: LoginPresenter?
 
-    private let usuarioLabel: UILabel = {
+    private let userLabel: UILabel = {
         
         let label = UILabel()
         label.text = "Usuario"
@@ -21,7 +21,7 @@ class LoginViewController: UIViewController {
         
     }()
     
-    private let usuarioTextField: UITextField = {
+    private let userTextField: UITextField = {
         
         let textField = UITextField()
         textField.placeholder = "Ingrese tu usuario"
@@ -31,7 +31,7 @@ class LoginViewController: UIViewController {
         
     }()
     
-    private let contrasenaLabel: UILabel = {
+    private let passwordLabel: UILabel = {
         
         let label = UILabel()
         label.text = "Ingresa tu contraseña"
@@ -42,7 +42,7 @@ class LoginViewController: UIViewController {
     }()
     
     
-    private let contrasenaTextField: UITextField = {
+    private let passwordTextField: UITextField = {
         
         let textField = UITextField()
         textField.placeholder = "Ingresa tu contraseña"
@@ -86,27 +86,25 @@ class LoginViewController: UIViewController {
         
         view.backgroundColor = .white
         
-
-        [usuarioLabel, usuarioTextField, contrasenaLabel, contrasenaTextField, loginButton, registerButton].forEach(view.addSubview)
+        [userLabel, userTextField, passwordLabel, passwordTextField, loginButton, registerButton].forEach(view.addSubview)
     
-
         NSLayoutConstraint.activate([
-            usuarioLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 100),
-            usuarioLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            userLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 100),
+            userLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
 
-            usuarioTextField.topAnchor.constraint(equalTo: usuarioLabel.bottomAnchor, constant: 8),
-            usuarioTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            userTextField.topAnchor.constraint(equalTo: userLabel.bottomAnchor, constant: 8),
+            userTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
 
-            contrasenaLabel.topAnchor.constraint(equalTo: usuarioTextField.bottomAnchor, constant: 20),
-            contrasenaLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            passwordLabel.topAnchor.constraint(equalTo: userTextField.bottomAnchor, constant: 20),
+            passwordLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
 
-            contrasenaTextField.topAnchor.constraint(equalTo: contrasenaLabel.bottomAnchor, constant: 8),
-            contrasenaTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            passwordTextField.topAnchor.constraint(equalTo: passwordLabel.bottomAnchor, constant: 8),
+            passwordTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
 
-            loginButton.topAnchor.constraint(equalTo: contrasenaTextField.bottomAnchor, constant: 30),
+            loginButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 30),
             loginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -50),
             
-            registerButton.topAnchor.constraint(equalTo: contrasenaTextField.bottomAnchor, constant: 30),
+            registerButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 30),
             registerButton.leadingAnchor.constraint(equalTo: loginButton.trailingAnchor, constant: 30)
         ])
         
@@ -120,24 +118,24 @@ class LoginViewController: UIViewController {
 extension LoginViewController {
     
     func loginButtonTapped() {
-        let usuario = usuarioTextField.text ?? ""
-        let contrasena = contrasenaTextField.text ?? ""
+        let user = userTextField.text ?? ""
+        let password = passwordTextField.text ?? ""
         
-        loginPresenter?.login(usuario: usuario, contrasena: contrasena)
+        loginPresenter?.login(user: user, password: password)
     }
 }
 
 
 extension LoginViewController: LoginView {
     
-    func mostrarError() {
-        let alerta = UIAlertController(title: "Error", message: "Credenciales Incorrectas", preferredStyle: .alert)
-        alerta.addAction(UIAlertAction(title: "OK", style: .default))
-        present(alerta, animated: true)
+    func showError() {
+        let alert = UIAlertController(title: "Error", message: "Credenciales Incorrectas", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
     }
     
-    func navegarAlReproductor() {
-        self.navigationController?.pushViewController(ReproductorViewController(), animated: true)
+    func navigatePlayer() {
+        self.navigationController?.pushViewController(ReproductiveViewController(), animated: true)
 
     }
     

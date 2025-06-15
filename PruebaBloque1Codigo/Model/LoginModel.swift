@@ -9,9 +9,9 @@ import Foundation
 
 
 class LoginModel {
-    private let usuarioValido = Usuario(nombre: "Admin", contrasena: "1234")
+    private let validUser = User(name: "Admin", password: "1234")
     
-    func validar(usuario: String, contrasena: String) -> Bool {
-        return usuario == usuarioValido.nombre && contrasena == usuarioValido.contrasena
+    func validate(user: String, password: String) -> Bool {
+        return user == validUser.name && password == validUser.password
     }
 }

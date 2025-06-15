@@ -9,7 +9,7 @@ import Foundation
 
 
 protocol AudioPlayerService {
-    func play(nombre: String)
+    func play(name: String)
     func pause()
     func resume()
     func isPlaying() -> Bool
