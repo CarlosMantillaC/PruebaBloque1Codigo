@@ -13,7 +13,6 @@ protocol ActionButtons: AnyObject {
 }
 
 class TableViewCell: UITableViewCell {
-    
     weak var actionButtons: ActionButtons?
     
     private let nameLabel: UILabel = {
@@ -21,7 +20,26 @@ class TableViewCell: UITableViewCell {
         label.font = .systemFont(ofSize: 16, weight: .medium)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .label
+        
         return label
+    }()
+    
+    private lazy var playButton: UIButton = {
+        let button = UIButton(type: .system, primaryAction: UIAction(handler: { [weak self] _ in self?.playButtonTapped() }))
+        let image = UIImage(systemName: "play.fill")
+        button.setImage(image, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        return button
+    }()
+    
+    private lazy var pauseButton: UIButton = {
+        let button = UIButton(type: .system, primaryAction: UIAction(handler: { [weak self] _ in self?.pauseButtonTapped() }))
+        let image = UIImage(systemName: "pause.fill")
+        button.setImage(image, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        return button
     }()
     
     private var isReproduciendo: Bool = false {
@@ -30,25 +48,9 @@ class TableViewCell: UITableViewCell {
         }
     }
     
-    private lazy var playButton: UIButton = {
-        let button = UIButton(type: .system, primaryAction: UIAction(handler: { [weak self] _ in self?.playButtonTapped() }))
-        let image = UIImage(systemName: "play.fill")
-        button.setImage(image, for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
-
-    private lazy var pauseButton: UIButton = {
-        let button = UIButton(type: .system, primaryAction: UIAction(handler: { [weak self] _ in self?.pauseButtonTapped() }))
-        let image = UIImage(systemName: "pause.fill")
-        button.setImage(image, for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
-    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-
+        
         [nameLabel, playButton, pauseButton].forEach(contentView.addSubview)
         
         NSLayoutConstraint.activate([
@@ -63,15 +65,13 @@ class TableViewCell: UITableViewCell {
             pauseButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -24),
             pauseButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             pauseButton.widthAnchor.constraint(equalToConstant: 40),
-
+            
         ])
-        
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     
     func configure(model: Song, isReproduciendo: Bool) {
         nameLabel.text = model.title

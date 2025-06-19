@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 class LoginModel {
     private let validUser = User(name: "Admin", password: "1234")
     

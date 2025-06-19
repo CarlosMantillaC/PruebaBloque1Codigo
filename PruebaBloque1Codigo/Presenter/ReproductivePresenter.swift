@@ -12,12 +12,13 @@ protocol ReproductiveView: AnyObject {
 }
 
 class ReproductivePresenter {
-    private let model = ReproductiveModel()
-    private let reproductiveService: AudioPlayerService
+    private let model: ReproductiveModel
     weak var view: ReproductiveView?
+    private let reproductiveService: AudioPlayerService
     private var currentSong: String?
     
-    init(view: ReproductiveView, reproductorService: AudioPlayerService = AVAudioPlayerService()) {
+    init(model: ReproductiveModel = ReproductiveModel() ,view: ReproductiveView, reproductorService: AudioPlayerService = AVAudioPlayerService()) {
+        self.model = model
         self.view = view
         self.reproductiveService = reproductorService
     }
@@ -55,6 +56,5 @@ class ReproductivePresenter {
     func randomSong() {
         reproduce(name: songIn(index: model.random() - 1).title)
     }
-    
 }
 

@@ -38,5 +38,4 @@ class AVAudioPlayerService: AudioPlayerService {
     func isPlaying() -> Bool {
         return player?.isPlaying ?? false
     }
-    
 }

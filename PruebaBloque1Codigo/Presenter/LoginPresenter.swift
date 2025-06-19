@@ -8,10 +8,8 @@
 import Foundation
 
 protocol LoginView: AnyObject {
-    
     func showError()
     func navigatePlayer()
-    
 }
 
 class LoginPresenter {

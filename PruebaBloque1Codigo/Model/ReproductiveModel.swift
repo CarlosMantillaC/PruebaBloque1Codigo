@@ -22,7 +22,6 @@ class ReproductiveModel {
     }
     
     func random(n: Int = 0, divider: Int = 2, accumulated: [Int] = []) -> Int {
-        
         if accumulated.count == 3 {
             return accumulated.last!
         }
@@ -34,6 +33,7 @@ class ReproductiveModel {
         if divider * divider > n {
             var newAccumulated = accumulated
             newAccumulated.append(n)
+            
             return random(n: n+1, divider: 2, accumulated: newAccumulated)
         }
         
