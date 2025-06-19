@@ -26,7 +26,7 @@ class ReproductiveViewController: UIViewController {
         configuration.title = "Random"
         configuration.buttonSize = .large
         
-        let button = UIButton(type: .system, primaryAction: UIAction(handler: { _ in self.reproductivePresenter.randomSong() }))
+        let button = UIButton(type: .system, primaryAction: UIAction(handler: { [weak self] _ in self?.reproductivePresenter.randomSong() }))
         button.configuration = configuration
         button.translatesAutoresizingMaskIntoConstraints = false
         return button

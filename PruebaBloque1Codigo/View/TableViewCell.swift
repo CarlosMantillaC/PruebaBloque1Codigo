@@ -31,7 +31,7 @@ class TableViewCell: UITableViewCell {
     }
     
     private lazy var playButton: UIButton = {
-        let button = UIButton(type: .system, primaryAction: UIAction(handler: { _ in self.playButtonTapped() }))
+        let button = UIButton(type: .system, primaryAction: UIAction(handler: { [weak self] _ in self?.playButtonTapped() }))
         let image = UIImage(systemName: "play.fill")
         button.setImage(image, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -39,7 +39,7 @@ class TableViewCell: UITableViewCell {
     }()
 
     private lazy var pauseButton: UIButton = {
-        let button = UIButton(type: .system, primaryAction: UIAction(handler: { _ in self.pauseButtonTapped() }))
+        let button = UIButton(type: .system, primaryAction: UIAction(handler: { [weak self] _ in self?.pauseButtonTapped() }))
         let image = UIImage(systemName: "pause.fill")
         button.setImage(image, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false

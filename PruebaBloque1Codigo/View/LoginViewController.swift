@@ -60,7 +60,7 @@ class LoginViewController: UIViewController {
         configuration.title = "Login"
         configuration.titleAlignment = .center
         
-        let button = UIButton(type: .system, primaryAction: UIAction(handler: { _ in self.loginButtonTapped() }))
+        let button = UIButton(type: .system, primaryAction: UIAction(handler: { [weak self] _ in self?.loginButtonTapped() }))
         button.configuration = configuration
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
