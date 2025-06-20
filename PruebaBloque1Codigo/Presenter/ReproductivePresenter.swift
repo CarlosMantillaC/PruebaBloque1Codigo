@@ -17,10 +17,13 @@ class ReproductivePresenter {
     private let reproductiveService: AudioPlayerService
     private var currentSong: String?
     
-    init(model: ReproductiveModel = ReproductiveModel() ,view: ReproductiveView, reproductorService: AudioPlayerService = AVAudioPlayerService()) {
+    init(model: ReproductiveModel = ReproductiveModel(), reproductorService: AudioPlayerService = AVAudioPlayerService()) {
         self.model = model
-        self.view = view
         self.reproductiveService = reproductorService
+    }
+    
+    func attachView(_ view: ReproductiveView) {
+        self.view = view
     }
     
     func numberSongs() -> Int {

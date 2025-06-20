@@ -8,7 +8,16 @@
 import UIKit
 
 class ReproductiveViewController: UIViewController {
-    var reproductivePresenter: ReproductivePresenter?
+    var reproductivePresenter: ReproductivePresenter
+    
+    init(reproductivePresenter: ReproductivePresenter = ReproductivePresenter()) {
+        self.reproductivePresenter = reproductivePresenter
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
@@ -24,7 +33,7 @@ class ReproductiveViewController: UIViewController {
         configuration.title = "Random"
         configuration.buttonSize = .large
         
-        let button = UIButton(type: .system, primaryAction: UIAction(handler: { [weak self] _ in self?.reproductivePresenter?.randomSong() }))
+        let button = UIButton(type: .system, primaryAction: UIAction(handler: { [weak self] _ in self?.reproductivePresenter.randomSong() }))
         button.configuration = configuration
         button.translatesAutoresizingMaskIntoConstraints = false
         
@@ -34,7 +43,7 @@ class ReproductiveViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        reproductivePresenter = ReproductivePresenter(view: self)
+        reproductivePresenter.attachView(self)
 
         view.backgroundColor = .systemBackground
         
@@ -60,17 +69,13 @@ extension ReproductiveViewController: ReproductiveView {
 
 extension ReproductiveViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        reproductivePresenter?.numberSongs() ?? 0
+        reproductivePresenter.numberSongs()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as! TableViewCell
-        
-        guard let presenter = reproductivePresenter else {
-            return cell
-        }
-        let model = presenter.songIn(index: indexPath.row)
-        let isReproduciendo = model.title == presenter.currentSongTitle()
+        let model = reproductivePresenter.songIn(index: indexPath.row)
+        let isReproduciendo = model.title == reproductivePresenter.currentSongTitle()
         cell.configure(model: model, isReproduciendo: isReproduciendo)
         cell.actionButtons = self
         
@@ -80,29 +85,27 @@ extension ReproductiveViewController: UITableViewDataSource {
 
 extension ReproductiveViewController: ActionButtons {
     func playAction(cell: TableViewCell) {
-        guard let indexPath = tableView.indexPath(for: cell),
-              let presenter = reproductivePresenter else {
+        guard let indexPath = tableView.indexPath(for: cell) else {
             return
         }
-        let song = presenter.songIn(index: indexPath.row)
-        if song.title == presenter.currentSongTitle() {
-            if !presenter.isPlaying() {
-                presenter.resume()
+        let song = reproductivePresenter.songIn(index: indexPath.row)
+        if song.title == reproductivePresenter.currentSongTitle() {
+            if !reproductivePresenter.isPlaying() {
+                reproductivePresenter.resume()
                 return
             }
         }
-        presenter.reproduce(name: song.title)
+        reproductivePresenter.reproduce(name: song.title)
     }
     
     func pauseAction(cell: TableViewCell) {
-        guard let indexPath = tableView.indexPath(for: cell),
-              let presenter = reproductivePresenter else {
+        guard let indexPath = tableView.indexPath(for: cell) else {
             return
         }
-        let song = presenter.songIn(index: indexPath.row)
+        let song = reproductivePresenter.songIn(index: indexPath.row)
         
-        if song.title == presenter.currentSongTitle() && presenter.isPlaying() == true {
-            presenter.pause()
+        if song.title == reproductivePresenter.currentSongTitle() && reproductivePresenter.isPlaying() == true {
+            reproductivePresenter.pause()
         }
     }
 }
